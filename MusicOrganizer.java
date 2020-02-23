@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * A class to hold details of audio tracks.
@@ -15,6 +16,8 @@ public class MusicOrganizer
     private MusicPlayer player;
     // A reader that can read music files and load them as tracks.
     private TrackReader reader;
+    // Random number generator
+    Random rand = new Random();
 
     /**
      * Create a MusicOrganizer
@@ -133,6 +136,14 @@ public class MusicOrganizer
     public void stopPlaying()
     {
         player.stop();
+    }
+    
+    public void shuffle()
+    {
+        int index = rand.ints(0, (tracks.size())).findFirst().getAsInt();
+        Track track = tracks.get(index);
+        player.startPlaying(track.getFilename());
+        System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
     }
 
     /**
