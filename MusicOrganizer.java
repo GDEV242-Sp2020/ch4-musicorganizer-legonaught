@@ -12,6 +12,7 @@ public class MusicOrganizer
 {
     // An ArrayList for storing music tracks.
     private ArrayList<Track> tracks;
+    private ArrayList<Track> nTracks;
     // A player for the music tracks.
     private MusicPlayer player;
     // A reader that can read music files and load them as tracks.
@@ -144,6 +145,19 @@ public class MusicOrganizer
         Track track = tracks.get(index);
         player.startPlaying(track.getFilename());
         System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
+    }
+    
+    public void shuffleAll()
+    {
+        nTracks = (ArrayList<Track>)tracks.clone();
+        while(nTracks.size() > 0)
+        {
+            int index = rand.ints(0, (nTracks.size())).findFirst().getAsInt();
+            Track track = nTracks.get(index);
+            System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
+            player.playWait(track.getFilename());
+            nTracks.remove(index);
+        }
     }
 
     /**

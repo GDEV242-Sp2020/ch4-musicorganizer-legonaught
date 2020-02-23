@@ -46,6 +46,20 @@ public class MusicPlayer
         }
     }
     
+    public void playWait(String filename)
+    {
+        try {
+            setupPlayer(filename);
+            player.play(5000);
+        }
+        catch(JavaLayerException e) {
+            reportProblem(filename);
+        }
+        finally {
+            killPlayer();
+        }
+    }
+    
     /**
      * Start playing the given audio file.
      * The method returns once the playing has been started.
